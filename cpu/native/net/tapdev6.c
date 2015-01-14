@@ -311,6 +311,10 @@ tapdev_init(void)
       perror(buf);
       exit(1);
     }
+
+    snprintf(buf, sizeof(buf), "ifconfig %s up",ifr.ifr_name);
+      system(buf);
+      printf("%s\n", buf);
   }
 #endif /* Linux */
 
@@ -330,10 +334,8 @@ tapdev_init(void)
      PRINTF("%s\n", buf);
   */
   /* freebsd */
-  snprintf(buf, sizeof(buf), "ifconfig tap0 up");
-  system(buf);
-  printf("%s\n", buf);
   
+
   /*  */
   lasttime = 0;
   
