@@ -36,8 +36,8 @@
  *      Matthias Kovatsch <kovatsch@inf.ethz.ch>
  */
 
-#ifndef ER_COAP_ENGINE_H_
-#define ER_COAP_ENGINE_H_
+#ifndef ER_COAP_ENGINE_DTLS_H_
+#define ER_COAP_ENGINE_DTLS_H_
 
 #include "sys/pt.h"
 #include "er-coap.h"
@@ -47,6 +47,8 @@
 
 #define SERVER_LISTEN_PORT      UIP_HTONS(COAP_SERVER_PORT)
 
+
+int coap_receive();
 
 typedef coap_packet_t rest_request_t;
 typedef coap_packet_t rest_response_t;
@@ -83,4 +85,6 @@ PT_THREAD(coap_blocking_request
   }
 /*---------------------------------------------------------------------------*/
 
-#endif /* ER_COAP_ENGINE_H_ */
+
+
+#endif /* ER_COAP_ENGINE_DTLS_H_ */

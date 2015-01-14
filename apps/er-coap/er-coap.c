@@ -60,7 +60,7 @@
 /*- Variables ---------------------------------------------------------------*/
 /*---------------------------------------------------------------------------*/
 static struct uip_udp_conn *udp_conn = NULL;
-static uint16_t current_mid = 0;
+uint16_t current_mid = 0;
 
 coap_status_t erbium_status_code = NO_ERROR;
 char *coap_error_message = "";
@@ -417,6 +417,7 @@ coap_serialize_message(void *packet, uint8_t *buffer)
   return (option - buffer) + coap_pkt->payload_len; /* packet length */
 }
 /*---------------------------------------------------------------------------*/
+#if !WITH_DTLS_COAP
 void
 coap_send_message(uip_ipaddr_t *addr, uint16_t port, uint8_t *data,
                   uint16_t length)
@@ -433,6 +434,7 @@ coap_send_message(uip_ipaddr_t *addr, uint16_t port, uint8_t *data,
   memset(&udp_conn->ripaddr, 0, sizeof(udp_conn->ripaddr));
   udp_conn->rport = 0;
 }
+#endif /* WITH_DTLS_COAP */
 /*---------------------------------------------------------------------------*/
 coap_status_t
 coap_parse_message(void *packet, uint8_t *data, uint16_t data_len)
