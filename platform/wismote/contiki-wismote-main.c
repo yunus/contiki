@@ -134,9 +134,10 @@ set_rime_addr(void)
 
   //	Set node address
 #if NETSTACK_CONF_WITH_IPV6
-  //memcpy(addr.u8, ds2411_id, sizeof(addr.u8));
-  n_addr.u8[7] = node_id & 0xff;
-  n_addr.u8[6] = node_id >> 8;
+  for(i = 0; i < sizeof(uip_lladdr.addr); i += 2) {
+      n_addr.u8[i + 1] = node_id & 0xff;
+      n_addr.u8[i + 0] = node_id >> 8;
+    }
 #else
  /* if(node_id == 0) {
     for(i = 0; i < sizeof(linkaddr_t); ++i) {
