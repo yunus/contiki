@@ -134,6 +134,11 @@ set_rf_params(void)
   NETSTACK_RADIO.set_value(RADIO_PARAM_CHANNEL, CC2538_RF_CHANNEL);
   NETSTACK_RADIO.set_object(RADIO_PARAM_64BIT_ADDR, ext_addr, 8);
 }
+
+void uip_log(char *msg){
+	PRINTF("UIP-LOG: %s\n",msg);
+}
+
 /*---------------------------------------------------------------------------*/
 /**
  * \brief Main routine for the OpenMote-CC2538 platform
@@ -207,11 +212,14 @@ main(void)
   antenna_init();
   PRINTF(" Antenna: external\n");
 
-#if UIP_CONF_IPV6
+#if NETSTACK_CONF_WITH_IPV6
   memcpy(&uip_lladdr.addr, &linkaddr_node_addr, sizeof(uip_lladdr.addr));
   queuebuf_init();
   process_start(&tcpip_process, NULL);
-#endif /* UIP_CONF_IPV6 */
+
+#endif /* NETSTACK_CONF_WITH_IPV6 */
+
+
 
   process_start(&sensors_process, NULL);
 
@@ -222,6 +230,13 @@ main(void)
 
   watchdog_start();
   fade(LEDS_ORANGE);
+
+  PRINTF("%s %s %s, channel check rate %lu Hz, radio channel %u, PANID 0x%x\n",
+           NETSTACK_LLSEC.name, NETSTACK_MAC.name, NETSTACK_RDC.name,
+           CLOCK_SECOND / (NETSTACK_RDC.channel_check_interval() == 0 ? 1:
+                           NETSTACK_RDC.channel_check_interval()),
+  						 CC2538_RF_CHANNEL,
+  						 IEEE802154_PANID);
 
   while(1) {
     uint8_t r;

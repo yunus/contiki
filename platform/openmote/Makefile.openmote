@@ -6,7 +6,7 @@ endif
 
 CONTIKI_TARGET_DIRS = . dev
 
-CONTIKI_TARGET_SOURCEFILES += leds.c leds-arch.c
+CONTIKI_TARGET_SOURCEFILES += leds.c leds-arch.c i2c.c
 CONTIKI_TARGET_SOURCEFILES += contiki-main.c
 CONTIKI_TARGET_SOURCEFILES += sensors.c smartrf-sensors.c button-sensor.c
 CONTIKI_TARGET_SOURCEFILES += antenna.c

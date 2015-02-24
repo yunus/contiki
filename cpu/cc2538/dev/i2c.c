@@ -68,7 +68,7 @@ i2c_master_disable(void)
   REG(I2CM_CR) &= ~0x10;  /* Reset MFE bit */
 }
 /*---------------------------------------------------------------------------*/
-static uint32_t
+uint32_t
 get_sys_clock(void)
 {
   return SYS_CTRL_32MHZ / ((REG(SYS_CTRL_CLOCK_STA) & SYS_CTRL_CLOCK_STA_SYS_DIV) + 1); /* Get the clock status diviser */
