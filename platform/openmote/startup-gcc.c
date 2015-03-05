@@ -106,7 +106,7 @@ void uart1_isr(void);
 #endif /* UART_CONF_ENABLE */
 /*---------------------------------------------------------------------------*/
 /* Allocate stack space */
-static unsigned long stack[512];
+static unsigned long stack[512+64];
 /*---------------------------------------------------------------------------*/
 /* Linker construct indicating .text section location */
 extern uint8_t _text[0];
